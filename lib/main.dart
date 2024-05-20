@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -66,10 +67,12 @@ class LocaleProvider with ChangeNotifier {
       "moreInfo": "For more info about customs fees, click here",
       "RateTo": "Rate to DZD",
       "CurrentRate": "Current Exchange Rates To Algerian Dinar:",
-      "Selectcurrency": "Select currency"
+      "Selectcurrency": "Select currency",
+      "disclaimer": "This calculation is based on the information found on the Algerian Customs websites, please note that the actual value that you'll be charged may vary and is not final!",
+      "disclaimer_title": "!DISCLAIMER!"
     },
     'fr': {
-      'title': 'Calculateur de frais Douanes DZ',
+      'title': 'Calculateur des frais de Douanes DZ',
       'enterGoodsValue': 'Entrez la Valeur des Marchandises',
       'calculate': 'Calculer',
       "currency": "Devise",
@@ -81,7 +84,9 @@ class LocaleProvider with ChangeNotifier {
       "moreInfo": "Pour plus d'informations sur les frais de douane, cliquez ici",
       "RateTo": "Taux en DZD",
       "CurrentRate": "Taux de change actuels en dinar algérien :",
-      "Selectcurrency": "Sélectionnez la devise"
+      "Selectcurrency": "Sélectionnez la devise",
+      "disclaimer": "Ce calcul est basé sur les informations trouvées sur les sites Internet des douanes algériennes, notez que la valeur réelle qui vous sera facturée peut varier!",
+      "disclaimer_title": "!ATTENTION!"
     },
     'ar': {
       "title": "حاسبة الجمارك الجزائرية",
@@ -96,8 +101,11 @@ class LocaleProvider with ChangeNotifier {
       "moreInfo": "لمزيد من المعلومات حول الرسوم الجمركية، انقر هنا",
       "RateTo": "السعر د.ج ",
       "CurrentRate": "أسعار الصرف الحالية إلى الدينار الجزائري :",
-      "Selectcurrency": "اختر العملة"
-      // Add more locales as needed
+      "Selectcurrency": "اختر العملة",
+      "disclaimer": "يعتمد هذا الحساب على المعلومات الموجودة على مواقع الجمارك الجزائرية، يرجى ملاحظة أن القيمة الفعلية التي سيتم تحصيلها منك قد تختلف وليست نهائية!",
+      "disclaimer_title": "!انتباه!"
+      // Add more locales as needed,
+
     }
   };
 
@@ -253,6 +261,27 @@ class _CustomsCalculatorState extends State<CustomsCalculator> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            const SizedBox(height: 1),
+            Text(localizations.translate("disclaimer_title"),
+              style: const TextStyle(
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.black54,
+
+              ),
+
+            ),
+
+            const SizedBox(height: 5),
+            Text(localizations.translate("disclaimer"),
+            style: const TextStyle(
+              fontStyle: FontStyle.italic,
+              fontSize: 14,
+              color: Colors.black54
+              ),
+            ),
+            const SizedBox(height: 20),
             TextField(
               controller: _goodsValueController,
               decoration: InputDecoration(
